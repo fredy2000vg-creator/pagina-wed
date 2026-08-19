@@ -1,0 +1,429 @@
+ /* ==========================================================
+   Colegio César Vallejo — Haquira, Cotabambas
+   Paleta: noche andina, oro de altura, arcilla, papel cálido
+   ========================================================== */
+
+:root{
+  --night:      #16233F;
+  --night-2:    #1F3157;
+  --ochre:      #D19A3B;
+  --ochre-dim:  #B98432;
+  --adobe:      #B25A42;
+  --parchment:  #F3EEDF;
+  --ink:        #211D17;
+  --mist:       #C9D2E0;
+  --mist-dim:   #93A0BD;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Work Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --container: 1120px;
+  --radius: 4px;
+  --ease: cubic-bezier(.22,.68,.35,1);
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  *, *::before, *::after{
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body{
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--parchment);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3{
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 .5em;
+  letter-spacing: -0.01em;
+}
+
+p{ margin: 0 0 1em; }
+
+a{ color: inherit; }
+
+.eyebrow{
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--adobe);
+  margin: 0 0 .9em;
+}
+.eyebrow-light{ color: var(--ochre); }
+
+/* ---------- Header ---------- */
+.site-header{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 1.1rem 0;
+  background: transparent;
+  transition: background .35s var(--ease), padding .35s var(--ease), box-shadow .35s var(--ease);
+}
+.site-header.scrolled{
+  background: rgba(22,35,63,.92);
+  backdrop-filter: blur(6px);
+  padding: .7rem 0;
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
+}
+.header-inner{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  text-decoration: none;
+  color: #fff;
+  font-family: var(--font-mono);
+  letter-spacing: .1em;
+  font-size: .85rem;
+}
+.brand-mark{ width: 22px; height: 22px; color: var(--ochre); display: inline-flex; }
+.brand-mark svg{ width: 100%; height: 100%; }
+
+.main-nav{ display: flex; gap: 2rem; }
+.main-nav a{
+  color: var(--mist);
+  text-decoration: none;
+  font-size: .92rem;
+  position: relative;
+  transition: color .25s;
+}
+.main-nav a::after{
+  content: "";
+  position: absolute;
+  left: 0; bottom: -4px;
+  width: 0; height: 1px;
+  background: var(--ochre);
+  transition: width .3s var(--ease);
+}
+.main-nav a:hover{ color: #fff; }
+.main-nav a:hover::after{ width: 100%; }
+
+.nav-toggle{
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.nav-toggle span{ width: 22px; height: 2px; background: #fff; }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display: inline-block;
+  padding: .8rem 1.6rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-size: .92rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  transition: transform .25s var(--ease), background .25s, border-color .25s;
+}
+.btn-primary{
+  background: var(--ochre);
+  color: var(--night);
+}
+.btn-primary:hover{ background: #e2ab4d; transform: translateY(-2px); }
+.btn-ghost{
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff;
+}
+.btn-ghost:hover{ border-color: #fff; transform: translateY(-2px); }
+
+/* ---------- Hero ---------- */
+.hero{
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%);
+  color: #fff;
+  overflow: hidden;
+  padding: 8rem 1.5rem 10rem;
+}
+.hero-content{
+  position: relative;
+  z-index: 2;
+  max-width: var(--container);
+  margin: 0 auto;
+  width: 100%;
+}
+.hero-title{
+  font-size: clamp(2.6rem, 7vw, 5.2rem);
+  color: #fff;
+}
+.hero-title em{
+  font-style: italic;
+  color: var(--ochre);
+}
+.hero-lede{
+  max-width: 520px;
+  color: var(--mist);
+  font-size: 1.08rem;
+}
+.hero-actions{ display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+.peaks{
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 220px;
+  z-index: 1;
+}
+.peaks-line{ fill: none; stroke-width: 2; }
+.peaks-back{ stroke: rgba(209,154,59,.25); fill: rgba(209,154,59,.06); }
+.peaks-front{ stroke: rgba(178,90,66,.4); fill: rgba(178,90,66,.1); }
+
+/* reveal-item: hero staggered entrance */
+.reveal-item{
+  opacity: 0;
+  transform: translateY(22px);
+  animation: riseIn .8s var(--ease) forwards;
+}
+.reveal-item[data-delay="0"]{ animation-delay: .1s; }
+.reveal-item[data-delay="1"]{ animation-delay: .28s; }
+.reveal-item[data-delay="2"]{ animation-delay: .46s; }
+.reveal-item[data-delay="3"]{ animation-delay: .64s; }
+
+@keyframes riseIn{
+  to{ opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Sections generic ---------- */
+.section{
+  padding: 7rem 1.5rem;
+}
+.section-inner{
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.section-title{ font-size: clamp(1.8rem, 3.4vw, 2.6rem); }
+.section-dark{
+  background: var(--night);
+  color: #fff;
+}
+.section-dark h2{ color: #fff; }
+.section-parchment{ background: #EAE3CE; }
+
+.split{
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 4rem;
+  align-items: center;
+}
+.split-text h2{ max-width: 480px; }
+.split-text p{ max-width: 480px; color: inherit; opacity: .92; }
+
+.text-note{
+  font-family: var(--font-mono);
+  font-size: .8rem;
+  opacity: .6;
+}
+
+/* Textile / chakana decorative block */
+.textile-block{
+  aspect-ratio: 1/1;
+  max-width: 320px;
+  margin: 0 auto;
+  color: var(--ochre);
+  opacity: .9;
+}
+.chakana-grid{ width: 100%; height: 100%; }
+
+/* ---------- Cards ---------- */
+.cards-2col{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.card{
+  background: var(--night-2);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: var(--radius);
+  padding: 2.2rem;
+  transition: transform .35s var(--ease), border-color .35s;
+}
+.card:hover{ transform: translateY(-6px); border-color: rgba(209,154,59,.4); }
+.card-icon{ width: 26px; height: 26px; color: var(--ochre); margin-bottom: 1rem; }
+.card h3{ color: #fff; }
+.card p{ color: var(--mist); margin: 0; }
+
+.cards-grid{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.offer-card{
+  background: var(--parchment);
+  border: 1px solid rgba(33,29,23,.1);
+  border-left: 3px solid var(--adobe);
+  padding: 1.8rem;
+  border-radius: var(--radius);
+  transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+}
+.offer-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 16px 30px rgba(33,29,23,.12);
+}
+.offer-card h3{ font-size: 1.15rem; }
+.offer-card p{ margin: 0; font-size: .94rem; opacity: .85; }
+
+/* ---------- Values row ---------- */
+.values-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+.value-item{
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  font-family: var(--font-mono);
+  font-size: .95rem;
+  letter-spacing: .03em;
+  color: var(--mist);
+}
+.value-mark{ width: 22px; height: 22px; color: var(--ochre); }
+
+/* ---------- Contact ---------- */
+.contact-list{
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+  display: grid;
+  gap: .9rem;
+}
+.contact-list li{
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(33,29,23,.12);
+  padding-bottom: .6rem;
+}
+.contact-label{
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--adobe);
+  min-width: 110px;
+}
+
+.contact-form{
+  background: var(--night);
+  color: #fff;
+  padding: 2.2rem;
+  border-radius: var(--radius);
+  display: grid;
+  gap: 1.1rem;
+}
+.contact-form label{
+  display: grid;
+  gap: .4rem;
+  font-size: .85rem;
+  color: var(--mist);
+}
+.contact-form input,
+.contact-form textarea{
+  font-family: var(--font-body);
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: var(--radius);
+  padding: .7rem .9rem;
+  color: #fff;
+  font-size: .95rem;
+  resize: vertical;
+}
+.contact-form input:focus,
+.contact-form textarea:focus{
+  outline: 2px solid var(--ochre);
+  outline-offset: 1px;
+}
+.form-note{
+  font-family: var(--font-mono);
+  font-size: .78rem;
+  color: var(--mist-dim);
+}
+
+/* ---------- Footer ---------- */
+.site-footer{
+  background: var(--night);
+  color: var(--mist-dim);
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  font-size: .85rem;
+}
+.footer-fine{ opacity: .6; font-family: var(--font-mono); font-size: .75rem; margin-top: .4rem; }
+
+/* ---------- Scroll reveal ---------- */
+.reveal{
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+.reveal.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* keyboard focus visibility */
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
+  outline: 2px solid var(--ochre);
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px){
+  .main-nav{
+    position: fixed;
+    top: 0; right: 0;
+    height: 100vh;
+    width: min(78vw, 320px);
+    background: var(--night);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform .4s var(--ease);
+  }
+  .main-nav.open{ transform: translateX(0); }
+  .nav-toggle{ display: flex; }
+
+  .split{ grid-template-columns: 1fr; gap: 2.5rem; }
+  .cards-2col{ grid-template-columns: 1fr; }
+  .cards-grid{ grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px){
+  .cards-grid{ grid-template-columns: 1fr; }
+  .section{ padding: 5rem 1.2rem; }
+  .hero{ padding: 7rem 1.2rem 8rem; }
+}
